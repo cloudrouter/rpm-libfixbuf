@@ -1,8 +1,7 @@
-
 Summary: fixbuf IPFIX implementation library
 Name: libfixbuf
 Version: 1.6.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Applications/System
 License: LGPL
 Source: http://tools.netsa.cert.org/releases/%{name}-%{version}.tar.gz
@@ -31,6 +30,8 @@ BuildRequires: libspread-devel
 %if "x" == "x1"
 BuildRequires: openssl-devel
 %endif
+BuildRequires: gcc
+BuildRequires: make
 
 %description 
 libfixbuf aims to be a compliant implementation of the IPFIX Protocol
@@ -80,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Thu Dec 24 2015 John Siegrist <john@complects.com> - 1.6.2-2
+- Added missing build dependencies.
+
 * Tue Jun 02 2015 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 1.6.2-1
 - Initial specfile
 
