@@ -1,25 +1,27 @@
 Summary: fixbuf IPFIX implementation library
 Name: libfixbuf
-Version: 1.6.2
-Release: 2%{?dist}
+Version: 1.7.1
+Release: 1%{?dist}
 Group: Applications/System
 License: LGPL
 Source: http://tools.netsa.cert.org/releases/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}
 Vendor: http://tools.netsa.cert.org/
+
 Provides: libfixbuf
 Provides: libfixbuf.so
-Requires: glib2 >= 2.4.7
+
+Requires: glib2 >= 2.6.4
+Requires: openssl
+
 %if "x" == "x1"
 Requires: libsctp
 %endif
 %if "x" == "x1"
 Requires: libspread
 %endif
-%if "x" == "x1"
-Requires: openssl
-%endif
-BuildRequires: glib2-devel >= 2.4.7
+
+BuildRequires: glib2-devel >= 2.6.4
 BuildRequires: pkgconfig >= 0.8
 %if "x" == "x1"
 BuildRequires: libsctp-devel
@@ -27,11 +29,11 @@ BuildRequires: libsctp-devel
 %if "x" == "x1"
 BuildRequires: libspread-devel
 %endif
-%if "x" == "x1"
-BuildRequires: openssl-devel
-%endif
+BuildRequires: automake
+BuildRequires: autoconf
 BuildRequires: gcc
 BuildRequires: make
+BuildRequires: openssl-devel
 
 %description 
 libfixbuf aims to be a compliant implementation of the IPFIX Protocol
@@ -52,7 +54,7 @@ Static libraries and C header files for libfixbuf.
 %setup -q -n %{name}-%{version}
 
 %build
-./configure 
+./configure --with-openssl
 %{__make}
 
 %install
@@ -81,8 +83,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Sun Oct 16 2016 John Siegrist <john@complects.com> - 1.7.1-1
+- Update version to 1.7.1
+
 * Thu Dec 24 2015 John Siegrist <john@complects.com> - 1.6.2-2
-- Added missing build dependencies.
+- Added missing build dependencies
 
 * Tue Jun 02 2015 Arun Babu Neelicattu <arun.neelicattu@gmail.com> - 1.6.2-1
 - Initial specfile
